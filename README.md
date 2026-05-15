@@ -4,7 +4,9 @@
 
 
 
-![Screenshot_2824-07-30_15-49-14](https://github.com/user-attachments/assets/4f5ffa97-5bf7-4834-875a-6fb3832be6d3)
+<img width="1050" height="680" alt="macdaddy (1)" src="https://github.com/user-attachments/assets/09217c89-2d8a-48ec-8d59-1119b3b468ed" />
+
+
 
 
 
@@ -19,7 +21,7 @@
 
 Overview
 
-MacDaddy is a Python script designed to help you manage and manipulate MAC addresses on your network interfaces. It provides a range of functionalities including viewing, changing, and resetting MAC addresses, backing up and restoring MAC addresses, and even automating MAC address changes. 
+MacDaddy is a Python tool designed to help you manage and manipulate MAC addresses on your network interfaces. It provides a range of functionalities including viewing, changing, and resetting MAC addresses, backing up and restoring MAC addresses, and even automating MAC address changes. 
 
 -------------------------------
 KEY FEATURES
@@ -45,7 +47,7 @@ Git clone installation:
 
 1. 'git clone https://github.com/TheJuicePapi/macdaddy.git'
 2. 'cd macdaddy'
-3. 'sudo chmod +x install.sh macdaddy.py'
+3. 'chmod +x install.sh macdaddy.py'
 4. 'sudo ./install.sh'
 5. Exit and open a new terminal to use 'macdaddy' shortcut 
 
@@ -53,7 +55,7 @@ Git clone installation:
 
 DEPENDANCIES
 
-For this script to work you will need to have python3, macchanger, and iproute2 installed. The install.sh should automatically install them for you.
+For this tool to work you will need to have python3, macchanger, and iproute2 installed. The install.sh should automatically install them for you.
 If not then use:
 
 * sudo apt-get install -y python3
@@ -62,5 +64,5 @@ If not then use:
 
 -------------------------------
 
-This scipt has been tested on my RPI 4b running a kali linux arm.
+This tool has been tested on my RPI 4b running a kali linux arm.
 Enjoy and use responsibly
