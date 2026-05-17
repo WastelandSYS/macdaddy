@@ -1,6 +1,6 @@
 <img width="1536" height="1024" alt="ChatGPT Image May 12, 2026, 09_59_35 AM" src="https://github.com/user-attachments/assets/ef821ef7-33d4-45e1-9f44-951a869028fe" />
 
-# MacDaddy - by TheJuicePapi
+# MacDaddy - by WastelandSYS
 
 
 
@@ -45,7 +45,7 @@ INSTALLATION & USAGE
 
 Git clone installation:
 
-1. 'git clone https://github.com/TheJuicePapi/macdaddy.git'
+1. 'git clone https://github.com/WastelandSYS/macdaddy.git'
 2. 'cd macdaddy'
 3. 'chmod +x install.sh macdaddy.py'
 4. 'sudo ./install.sh'
