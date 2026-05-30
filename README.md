@@ -6,8 +6,9 @@
 
 Built by **WastelandSYS**, MacDaddy keeps the classic Linux utility feel: direct, terminal-first, scriptable, and practical for Raspberry Pi labs, Kali systems, privacy workflows, and network testing environments.
 
-<img width="1050" height="680" alt="MacDaddy terminal interface" src="https://github.com/user-attachments/assets/09217c89-2d8a-48ec-8d59-1119b3b468ed" />
-
+<p align="center">
+  <img width="401" height="493" alt="macdaddyMAINMENU" src="https://github.com/user-attachments/assets/8ac4fed3-cfb4-4606-aa44-811c68dcfa8e" />
+</p>
 ---
 
 # WHY MACDADDY?
