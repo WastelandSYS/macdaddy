@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 
+# =========================================================
+# MacDaddy
+# Advanced MAC address management utility for Linux
+#
+# Copyright (c) 2026 WastelandSYS
+# Licensed under GPLv3
+# =========================================================
+
 import argparse
 import json
 import os
@@ -24,6 +32,7 @@ BOLD = "\033[1m"
 UNDERLINE = "\033[4m"
 
 APP_NAME = "macdaddy"
+APP_VERSION = "1.3.0"
 DEFAULT_BACKUP_FILE = "mac_backup.txt"
 MAC_RE = re.compile(r"^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$")
 AUTO_CHANGE_THREAD = None
@@ -477,7 +486,7 @@ def main_menu():
     while True:
         clear_terminal()
         print_header()
-        print_color("      MacDaddy - MAC Address Changer - v1.2", INFO)
+        print_color(f"      MacDaddy - MAC Address Changer - v{APP_VERSION}", INFO)
         print(colorize("=" * 50, HEADER))
         print_color("1.  Show available interfaces")
         print_color("2.  Show MAC address information")
@@ -558,6 +567,7 @@ def build_parser():
     parser.add_argument("--no-color", action="store_true", help="Disable colored output.")
     parser.add_argument("--color", action="store_true", help="Force colored output.")
     parser.add_argument("--dry-run", action="store_true", help="Print commands without changing interfaces.")
+    parser.add_argument("--version", action="version", version=f"MacDaddy {APP_VERSION}")
     subparsers = parser.add_subparsers(dest="command")
 
     subparsers.add_parser("menu", help="Launch the interactive menu.")
