@@ -463,6 +463,4 @@ GNU GPL v3 License
 
 # AUTHOR
 
-**WastelandSYS**
-
-Built for Linux terminal users, Raspberry Pi labs, network testing, and responsible MAC address management.
+[WastelandSYS](https://github.com/WastelandSYS)
