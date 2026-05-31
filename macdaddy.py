@@ -55,22 +55,56 @@ def print_color(message, color=TEXT):
     print(colorize(message, color))
 
 
+def terminal_width():
+    return shutil.get_terminal_size(fallback=(80, 24)).columns
+
+
+def center_line(message, width=None):
+    width = width or terminal_width()
+    if len(message) >= width:
+        return message
+    return message.center(width)
+
+
+def print_centered(message, color=TEXT, width=None):
+    print(colorize(center_line(message, width), color))
+
+
+def print_centered_block(lines, color=TEXT, width=None):
+    width = width or terminal_width()
+    block_width = max((len(line) for line in lines), default=0)
+    padding = " " * max(0, (width - block_width) // 2)
+    for line in lines:
+        print(colorize(f"{padding}{line}", color))
+
+
+def print_rule(color=HEADER, width=None):
+    width = width or terminal_width()
+    rule_width = max(1, min(80, width))
+    print(colorize(center_line("=" * rule_width, width), color))
+
+
 def clear_terminal():
     if sys.stdout.isatty():
         os.system("clear")
 
 
 def print_header():
-    print(colorize("\n" + "=" * 50, HEADER))
-    print(colorize("           ╭━╮╭━╮╱╱╱╱╱╭━━━╮╱╱╱╱╭╮╱╭╮", HEADER))
-    print(colorize("           ┃┃╰╯┃┃╱╱╱╱╱╰╮╭╮┃╱╱╱╱┃┃╱┃┃", HEADER))
-    print(colorize("           ┃╭╮╭╮┣━━┳━━╮┃┃┃┣━━┳━╯┣━╯┣╮╱╭╮", HEADER))
-    print(colorize("           ┃┃┃┃┃┃╭╮┃╭━╯┃┃┃┃╭╮┃╭╮┃╭╮┃┃╱┃┃", HEADER))
-    print(colorize("           ┃┃┃┃┃┃╭╮┃╰━┳╯╰╯┃╭╮┃╰╯┃╰╯┃╰━╯┃", HEADER))
-    print(colorize("           ╰╯╰╯╰┻╯╰┻━━┻━━━┻╯╰┻━━┻━━┻━╮╭╯", HEADER))
-    print(colorize("           ╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╭━╯┃", HEADER))
-    print(colorize("           ╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╰━━╯", HEADER))
-    print(colorize("=" * 50 + "\n", HEADER))
+    banner = [
+        "╭━╮╭━╮╱╱╱╱╱╭━━━╮╱╱╱╱╭╮╱╭╮",
+        "┃┃╰╯┃┃╱╱╱╱╱╰╮╭╮┃╱╱╱╱┃┃╱┃┃",
+        "┃╭╮╭╮┣━━┳━━╮┃┃┃┣━━┳━╯┣━╯┣╮╱╭╮",
+        "┃┃┃┃┃┃╭╮┃╭━╯┃┃┃┃╭╮┃╭╮┃╭╮┃┃╱┃┃",
+        "┃┃┃┃┃┃╭╮┃╰━┳╯╰╯┃╭╮┃╰╯┃╰╯┃╰━╯┃",
+        "╰╯╰╯╰┻╯╰┻━━┻━━━┻╯╰┻━━┻━━┻━╮╭╯",
+        "╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╭━╯┃",
+        "╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╰━━╯",
+    ]
+    print()
+    print_rule()
+    print_centered_block(banner, HEADER)
+    print_rule()
+    print()
 
 
 def default_backup_path():
@@ -486,23 +520,28 @@ def main_menu():
     while True:
         clear_terminal()
         print_header()
-        print_color(f"      MacDaddy - MAC Address Changer - v{APP_VERSION}", INFO)
-        print(colorize("=" * 50, HEADER))
-        print_color("1.  Show available interfaces")
-        print_color("2.  Show MAC address information")
-        print_color("3.  Randomize MAC address of an interface")
-        print_color("4.  Randomize MAC addresses of all interfaces")
-        print_color("5.  Reset MAC address of an interface")
-        print_color("6.  Reset MAC addresses of all interfaces")
-        print_color("7.  Backup MAC addresses")
-        print_color("8.  Restore MAC addresses from backup")
-        print_color("9.  Set custom MAC address")
-        print_color("10. Check interface status")
-        print_color("11. Start auto MAC address changing")
-        print_color("12. Stop auto MAC address changing")
-        print_color("13. Change interface state (up/down)")
-        print_color("14. Exit")
-        print(colorize("=" * 50, HEADER))
+        menu_width = min(80, terminal_width())
+        print_centered(f"MacDaddy - MAC Address Manager - v{APP_VERSION}", INFO)
+        print(colorize(center_line("-" * menu_width), HEADER))
+        menu_items = [
+            (1, "Show available interfaces"),
+            (2, "Show MAC address information"),
+            (3, "Randomize MAC address of an interface"),
+            (4, "Randomize MAC addresses of all interfaces"),
+            (5, "Reset MAC address of an interface"),
+            (6, "Reset MAC addresses of all interfaces"),
+            (7, "Backup MAC addresses"),
+            (8, "Restore MAC addresses from backup"),
+            (9, "Set custom MAC address"),
+            (10, "Check interface status"),
+            (11, "Start auto MAC address changing"),
+            (12, "Stop auto MAC address changing"),
+            (13, "Change interface state (up/down)"),
+            (14, "Exit"),
+        ]
+        menu_lines = [f"{number:>2}.  {label}" for number, label in menu_items]
+        print_centered_block(menu_lines, TEXT)
+        print(colorize(center_line("-" * menu_width), HEADER))
 
         choice = input("Enter your choice: ").strip()
         clear_terminal()
@@ -669,6 +708,12 @@ def main(argv=None):
 
     try:
         run_cli(args)
+    except KeyboardInterrupt:
+        AUTO_CHANGE_STOP.set()
+        if AUTO_CHANGE_THREAD is not None and AUTO_CHANGE_THREAD.is_alive():
+            AUTO_CHANGE_THREAD.join(timeout=2)
+        clear_terminal()
+        return 0
     except MacDaddyError as exc:
         print_color(f"[ERROR] {exc}", ERROR)
         return 1
