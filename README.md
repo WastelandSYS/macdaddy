@@ -2,42 +2,37 @@
 
 # MacDaddy
 
-**MacDaddy** is an advanced Linux terminal utility for managing, randomizing, resetting, backing up, and restoring network interface MAC addresses from either an interactive menu or automation-friendly CLI commands.
+**MacDaddy** is a WastelandSYS Linux terminal utility for managing network interface MAC addresses with an interactive menu, scriptable CLI commands, backup/restore support, and automation-friendly workflows.
 
-Built by **WastelandSYS**, MacDaddy keeps the classic Linux utility feel: direct, terminal-first, scriptable, and practical for Raspberry Pi labs, Kali systems, privacy workflows, and network testing environments.
+It is built for practical Linux administration, Raspberry Pi labs, Kali/Debian systems, and authorized network testing where you need MAC address changes to be readable, reversible, and easy to run from the terminal.
 
-<p align="center">
-  <img width="401" height="493" alt="macdaddyMAINMENU" src="https://github.com/user-attachments/assets/8ac4fed3-cfb4-4606-aa44-811c68dcfa8e" />
-</p>
 ---
 
 # WHY MACDADDY?
 
-MAC addresses are part of how Linux systems identify network interfaces on local networks. During legitimate testing, lab work, privacy practice, Raspberry Pi projects, and system administration, it is often useful to quickly inspect, randomize, reset, or restore those addresses without manually chaining several commands together.
+Changing a MAC address by hand often means stitching together `ip`, `macchanger`, interface state changes, notes, and backup files. MacDaddy keeps that work in one focused tool without hiding what is happening.
 
-MacDaddy focuses on that workflow:
+MacDaddy is designed to:
 
-* **MAC address management** — view interfaces, inspect MAC information, set custom addresses, and change interface state.
-* **Randomization** — randomize one interface or every detected MAC-capable interface with safer down/change/up handling.
-* **Reset functionality** — restore interfaces to their permanent hardware MAC addresses through `macchanger`.
-* **Backup and restore** — save current interface MAC addresses before making changes and restore them later.
-* **Automation support** — use CLI commands, `--dry-run`, confirmation bypass flags, and repeated randomization mode for scripts.
-* **Linux and Raspberry Pi use cases** — keep network testing and MAC management simple on laptops, single-board computers, Kali boxes, and Debian/Ubuntu-based systems.
+* Inspect MAC-capable interfaces before changes are made.
+* Randomize, reset, or assign MAC addresses through guided prompts or CLI commands.
+* Back up current MAC/interface state so changes can be restored later.
+* Keep risky operations clear, especially when a change may disconnect SSH, Wi-Fi, VPN, or other active sessions.
+* Stay lightweight enough for Raspberry Pi and lab systems while still feeling polished beside other WastelandSYS utilities.
 
-MacDaddy is not designed to hide abuse or bypass network rules. Use it responsibly, only on systems and networks where you have authorization.
+MacDaddy is a MAC address management utility, not a bypass or abuse tool. Use it only on systems and networks where you have permission to make interface changes.
 
 ---
 
 # FEATURES
 
-* Interactive terminal menu with WastelandSYS-style ASCII branding.
-* CLI mode for scripting and automation.
+* WastelandSYS-style interactive terminal menu.
+* Automation-friendly CLI mode.
+* Terminal-width aware banner and menu centering.
 * List available MAC-capable network interfaces.
 * Show MAC address and interface details for a selected interface.
-* Randomize a selected interface MAC address.
-* Randomize all detected MAC-capable interfaces.
-* Reset a selected interface to its permanent MAC address.
-* Reset all detected MAC-capable interfaces.
+* Randomize one interface or every detected MAC-capable interface.
+* Reset one interface or all interfaces to their permanent MAC addresses through `macchanger`.
 * Set a custom MAC address with format validation.
 * Warn when a custom MAC is not locally administered.
 * Check interface status and flags.
@@ -48,77 +43,60 @@ MacDaddy is not designed to hide abuse or bypass network rules. Use it responsib
 * `--dry-run` support for safer command review.
 * Color output controls with `--color` and `--no-color`.
 * Root checks for operations that modify interfaces.
-* Modern installer using `/opt/macdaddy` plus a global `macdaddy` command.
-* Clean uninstaller that leaves backups and user-created files untouched.
+* Installer for `/opt/macdaddy` plus the global `macdaddy` command.
+* Uninstaller that removes installed launchers and application files while preserving backups.
 * GPLv3 licensed.
 
 ---
 
 # MACDADDY WORKFLOW
 
-The workflow below follows the same terminal-first flow MacDaddy has always used. Replace the placeholders with updated screenshots when preparing the v1.3 GitHub release.
+### Main Menu
 
-## 1. Main Menu
+<p align="center">
+<img width="638" height="490" alt="macdaddyMAINMENU" src="https://github.com/user-attachments/assets/83730df6-355a-46cd-a35f-8a16c99f94ce" />
+</p>
 
-```text
-[ screenshot placeholder: MacDaddy main menu ]
-```
+Access MAC randomization, custom MAC assignment, backup, restore, automation, and interface management from a single terminal interface.
 
-Launch the interactive menu with:
+### Interface Detection
 
-```bash
-sudo macdaddy
-```
+<p align="center">
+<img width="641" height="330" alt="macdaddyINTERFACESELECTION" src="https://github.com/user-attachments/assets/c4301fc7-117c-4b47-ab8d-b284b96acbfb" />
+</p>
 
-## 2. Interface Selection
+Detect and display MAC-capable network interfaces before performing MAC address operations.
 
-```text
-[ screenshot placeholder: available interfaces and interface prompt ]
-```
+### Randomize MAC Address
 
-MacDaddy detects MAC-capable interfaces and lets you select by name or menu number.
+<p align="center">
+<img width="641" height="344" alt="macdaddyRANDOMIZED" src="https://github.com/user-attachments/assets/9b2b8ec1-aed8-4ad4-acda-a1246e52066d" />
+</p>
 
-## 3. Random MAC Generation
+Generate and apply randomized MAC addresses through a guided workflow for quick identity changes.
 
-```text
-[ screenshot placeholder: randomize interface output ]
-```
+### Backup
 
-Randomize a single interface from the menu or with CLI mode:
+<p align="center">
+<img width="641" height="244" alt="macdaddyBACKUP1" src="https://github.com/user-attachments/assets/806bc7b9-6c13-45a4-a2fa-e43e33462375" />
+</p>
 
-```bash
-sudo macdaddy randomize wlan0
-```
+Create backups of current MAC address settings before making changes or running automated workflows.
 
-## 4. Backup & Restore
+### Restore
 
-```text
-[ screenshot placeholder: backup and restore output ]
-```
+<p align="center">
+<img width="609" height="359" alt="macdaddyBACKUPRESTORED1" src="https://github.com/user-attachments/assets/b5d92fba-b29e-420a-99fc-68415587b812" />
+</p>
 
-Back up current addresses before changes:
+Restore previously saved MAC address configurations and recover original adapter settings.
 
-```bash
-sudo macdaddy backup
-```
+### Automation Mode
+<p align="center">
+<img width="561" height="484" alt="macdaddyAUTOMATEDCHANGES" src="https://github.com/user-attachments/assets/b3ce4965-85fc-4a60-9558-68d98039bad9" />
+</p>
 
-Restore later:
-
-```bash
-sudo macdaddy restore --yes
-```
-
-## 5. Automation Mode
-
-```text
-[ screenshot placeholder: auto randomization mode ]
-```
-
-Run repeated randomization until stopped:
-
-```bash
-sudo macdaddy auto --interval 300 wlan0
-```
+Continuously randomize MAC addresses at configurable intervals while displaying current, permanent, and newly assigned addresses.
 
 ---
 
@@ -135,7 +113,8 @@ sudo ./install.sh
 
 The installer will:
 
-* Install required packages on apt-based systems.
+* Check that it is running with root privileges.
+* Install required packages on apt-based systems when `apt-get` is available.
 * Verify `python3`, `macchanger`, and `ip` are available.
 * Install MacDaddy to `/opt/macdaddy/macdaddy.py`.
 * Create the global command `/usr/local/bin/macdaddy`.
@@ -158,13 +137,13 @@ Run the uninstaller from the cloned repository:
 sudo ./uninstall.sh
 ```
 
-The uninstaller removes:
+The uninstaller removes installed MacDaddy launchers and application files:
 
-* `/opt/macdaddy`
 * `/usr/local/bin/macdaddy`
+* `/opt/macdaddy`
 * MacDaddy desktop entries if any were installed later
 
-The uninstaller intentionally leaves user backups and generated files untouched, including backup files under `/var/lib/macdaddy` or user data directories.
+The uninstaller intentionally does **not** remove user backups or user-created data, including files under `/var/lib/macdaddy`, `~/.local/share/macdaddy`, custom backup paths, or local backup files.
 
 ---
 
@@ -339,13 +318,13 @@ MacDaddy also supports older local `mac_backup.txt` files during restore when no
 
 MacDaddy is Linux-focused and depends on Linux networking tools.
 
-Tested and targeted platforms:
+Target platforms:
 
 * Kali Linux
 * Debian
 * Ubuntu
 * Raspberry Pi OS
-* Raspberry Pi 4 / ARM Linux environments
+* Raspberry Pi / ARM Linux environments
 
 Expected to work on other Linux distributions when these commands are available:
 
@@ -357,7 +336,7 @@ Notes:
 
 * MAC changes usually require root privileges.
 * Changing MAC addresses can disconnect SSH, Wi-Fi, VPN, or other active network sessions.
-* Some drivers, virtual interfaces, enterprise networks, or managed Wi-Fi environments may prevent MAC changes.
+* Some drivers, virtual interfaces, managed networks, or Wi-Fi environments may prevent MAC changes.
 * Non-apt distributions can still use MacDaddy after manually installing dependencies.
 
 ---
@@ -378,87 +357,9 @@ Dependency purpose:
 
 ---
 
-# WHY MACDADDY?
-
-MacDaddy exists because MAC address management should be fast, readable, recoverable, and scriptable without losing the personality of a real Linux terminal tool.
-
-The project philosophy is simple:
-
-* Keep the WastelandSYS identity.
-* Preserve practical terminal workflows.
-* Avoid unnecessary GUI layers.
-* Make dangerous actions obvious.
-* Keep backups easy to find.
-* Support both hands-on menu use and automation.
-* Stay lightweight enough for Raspberry Pi and lab systems.
-
-MacDaddy belongs beside tools like SystemPi, Encryptopi, and noDIFFier as a focused WastelandSYS utility: polished enough for release, simple enough to trust, and direct enough for the terminal.
-
----
-
-# RELEASE READINESS FOR v1.3
-
-MacDaddy already has a public v1.2 release. This modernization prepares the project for a future **v1.3** release, not a reset to v1.0.
-
-Before publishing v1.3, consider addressing:
-
-* Capture fresh workflow screenshots and replace the README placeholders.
-* Test installer and uninstaller on a clean Debian/Ubuntu/Kali virtual machine.
-* Test on Raspberry Pi OS or Kali ARM hardware.
-* Verify behavior on Wi-Fi and Ethernet interfaces.
-* Confirm the GitHub release artifact, if any, matches the committed source.
-* Tag the release as `v1.3.0` after final testing.
-
-Recommended release title:
-
-```text
-MacDaddy v1.3.0 — Modernized WastelandSYS Release
-```
-
-Suggested release notes:
-
-```markdown
-## MacDaddy v1.3.0
-
-MacDaddy v1.3.0 modernizes the project for current WastelandSYS repository standards while preserving the existing MAC address management workflow from v1.2.
-
-### Highlights
-- Rewritten README with modern project structure, usage examples, compatibility notes, and release guidance.
-- Modernized installer with safer shell practices, dependency verification, clear status messages, and `/opt/macdaddy` installation layout.
-- Added `uninstall.sh` to remove installed application files, global command links, and desktop entries while preserving backups.
-- Added GPLv3 license support and source header.
-- Added CLI version reporting.
-- Documented backup locations, generated files, and automation usage.
-
-### Notes
-- Existing functionality is preserved.
-- Root privileges are still required for interface-changing operations.
-- Fresh screenshots are recommended before publishing the GitHub release.
-```
-
-Recommended GitHub topics/tags:
-
-```text
-mac-address, macchanger, linux, raspberry-pi, kali-linux, networking, privacy-tools, terminal, cli, python, iproute2, wastelandsys
-```
-
-Recommended short repository description:
-
-```text
-Advanced Linux MAC address management utility for randomization, reset, backup, restore, and automation.
-```
-
-Recommended About summary:
-
-```text
-MacDaddy is a WastelandSYS Linux terminal utility for managing MAC addresses with interactive and CLI workflows, backup/restore support, randomization, reset features, and Raspberry Pi-friendly automation.
-```
-
----
-
 # LICENSE
 
-GNU GPL v3 License
+MacDaddy is released under the GNU General Public License v3.0. See [`LICENSE`](LICENSE) for the full license text.
 
 ---
 
